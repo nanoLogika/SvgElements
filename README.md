@@ -1,3 +1,3 @@
 # SvgElements
 
-SvgElement is library to support esy cretion of SVG XML.
+SvgElement is library to support easy creation of SVG XML.
