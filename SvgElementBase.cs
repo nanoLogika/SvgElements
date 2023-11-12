@@ -259,7 +259,8 @@ namespace SvgElements {
         /// object.
         /// </summary>
         /// <returns>
-        /// An XML-element built from the properties of this SVG-element object.
+        /// The <see cref="XElement"/> built from the properties of this
+        /// SVG-element.
         /// </returns>
         public abstract XElement GetXml();
 
@@ -270,7 +271,9 @@ namespace SvgElements {
         /// value and comments are enbled a XML Comment element is placed before
         /// the XML-element.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A string containing <see cref="XElement"/> built from the properties of this
+        /// SVG-element preceeded by a <see cref="XComment"/> element.
+        /// </returns>
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             if (CommentsEnabled && !string.IsNullOrEmpty(Comment)) {
