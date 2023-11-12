@@ -118,21 +118,11 @@ namespace SvgElements {
             AddAttribute(xElement, "font-style", "italic", Italic);
 
             AddAttribute(xElement, "text-decoration", "underline", Underline);
-            AddAttribute(xElement, "text-decoration", "line-through", Strikethrough) ;
+            AddAttribute(xElement, "text-decoration", "line-through", Strikethrough);
 
             AddAttribute(xElement, "lengthAdjust", LengthAdjust, LengthAdjust != LengthAdjustType.None);
 
-            if (Tspans.Count > 0) {
-                foreach (TspanElement tspan in Tspans) {
-                    xElement.Add(tspan);
-                }
-            }
-            else if (!string.IsNullOrEmpty(Value)) {
-                xElement.Value = Value;
-            }
-            else {
-                xElement.Value = "&nbsp;";
-            }
+            AddTextContent(xElement);
 
             return xElement;
         }

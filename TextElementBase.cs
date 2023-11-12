@@ -177,5 +177,25 @@ namespace SvgElements {
         /// A IList of <see cref="TspanElement"/> objects.
         /// </value>
         public List<TspanElement> Tspans { get; } = new List<TspanElement>();
+
+
+        /// <summary>
+        /// Adds <i>tspan</i> elements or text value.
+        /// </summary>
+        /// <param name="xElement"></param>
+        protected void AddTextContent(XElement xElement) {
+            if (Tspans.Count > 0) {
+                foreach (TspanElement tspan in Tspans) {
+                    xElement.Add(tspan.GetXml());
+                }
+            }
+            else if (!string.IsNullOrEmpty(Value)) {
+                xElement.Value = Value;
+            }
+            else {
+                xElement.Add(new XAttribute("visibility", "hidden"));
+                xElement.Value = ".";
+            }
+        }
     }
 }
