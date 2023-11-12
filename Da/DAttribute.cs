@@ -55,6 +55,11 @@ namespace SvgElements.Da {
 		}
 
 
+		public void AddMoveAndArc(double cx, double cy, double sa, double ea, double rx, double ry, double rot, bool counterClockWise = true) {
+			_daList.Add(new MoveAbsArcDaClause(cx, cy, sa, ea, rx, ry, rot, counterClockWise));
+		}
+
+
 		public void AddLineAndArc(double cx, double cy, double sa, double ea, double r, bool counterClockWise = true) {
 			_daList.Add(new LineAbsArcDaClause(cx, cy, sa, ea, r, counterClockWise));
 		}

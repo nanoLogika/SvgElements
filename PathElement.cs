@@ -131,7 +131,7 @@ namespace SvgElements {
 
 
         /// <summary>
-        /// Adds a move clause and an arc clause to the d-Attribute
+        /// Adds a move clause and an circular arc clause to the d-Attribute
         /// of this path element and returns this element.
         /// </summary>
         /// <param name="cx"></param> 
@@ -143,6 +143,25 @@ namespace SvgElements {
         /// <returns>This <see cref="PathElement"/>.</returns>
         public PathElement AddMoveAndArc(double cx, double cy, double sa, double ea, double r, bool counterClockWise = true) {
             _da.AddMoveAndArc(cx, cy, sa, ea, r, counterClockWise);
+            return this;
+        }
+
+
+        /// <summary>
+        /// Adds a move clause and an elliptic arc clause to the d-Attribute
+        /// of this path element and returns this element.
+        /// </summary>
+        /// <param name="cx"></param>
+        /// <param name="cy"></param>
+        /// <param name="sa"></param>
+        /// <param name="ea"></param>
+        /// <param name="rx"></param>
+        /// <param name="ry"></param>
+        /// <param name="rot"></param>
+        /// <param name="counterClockWise"></param>
+        /// <returns>This <see cref="PathElement"/>.</returns>
+        public PathElement AddMoveAndArc(double cx, double cy, double sa, double ea, double rx, double ry, double rot, bool counterClockWise = true) {
+            _da.AddMoveAndArc(cx, cy, sa, ea, rx, ry, rot, counterClockWise);
             return this;
         }
 
