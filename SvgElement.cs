@@ -96,13 +96,13 @@ namespace SvgElements {
 
         /// <inheritdoc />
         public override XElement GetXml() {
-            XElement svg = new XElement("svg");
+            XNamespace xmlnssvg = Xmlns;
+            XElement svg = new XElement(xmlnssvg + "svg");
             AddID(svg);
             bool withViewbox = ViewboxMinX != null && ViewboxMinY != null && ViewboxWidth != null && ViewboxHeight != null;
             AddAttribute(svg, "viewbox", $"{ViewboxMinX} {ViewboxMinY} {ViewboxWidth} {ViewboxHeight}", withViewbox);
             AddAttribute(svg, "style", Style, !string.IsNullOrEmpty(Style));
-            AddAttribute(svg, "Xmlns", Xmlns, !string.IsNullOrEmpty(Xmlns));
-            AddAttribute(svg, "Version", Version, !string.IsNullOrEmpty(Version));
+            AddAttribute(svg, "version", Version, !string.IsNullOrEmpty(Version));
             AddStroke(svg);
             AddFill(svg);
             return svg;
