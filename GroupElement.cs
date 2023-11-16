@@ -23,6 +23,7 @@ namespace SvgElements {
 				xElement.Add(new XComment(Comment));
 			}
 			AddID(xElement);
+			AddClass(xElement);
 			AddTransform(xElement);
 			foreach (SvgElementBase child in Children) {
 				if (child == null) {

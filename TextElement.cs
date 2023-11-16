@@ -101,7 +101,9 @@ namespace SvgElements {
 		/// <param name="tspans"></param>
 		/// <returns>This <see cref="TextElement"/>.</returns>
 		public TextElement WithTspans(IList<TspanElement> tspans) {
-			Tspans.AddRange(tspans);
+			if (tspans != null) {
+				Tspans.AddRange(tspans);
+            }
 			return this;
 		}
 
@@ -152,17 +154,7 @@ namespace SvgElements {
 			AddAttribute(xElement, "text-decoration", "underline", Underline);
 			AddAttribute(xElement, "text-decoration", "line-through", Strikethrough);
 
-			if (Tspans != null && Tspans.Count > 0) {
-				foreach (TspanElement tspan in Tspans) {
-					xElement.Add(tspan.GetXml());
-				}
-			}
-			else if (!string.IsNullOrEmpty(Value)) {
-				xElement.Value = Value;
-			}
-			else {
-				xElement.Value = string.Empty;
-			}
+			AddTextContent(xElement);
 
 			return xElement;
 		}
