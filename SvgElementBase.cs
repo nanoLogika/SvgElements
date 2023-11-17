@@ -237,7 +237,7 @@ namespace SvgElements {
         /// </summary>
         /// <returns></returns>
         public SvgElementBase ReverseY(bool value = true) {
-            _ta.ReverseY = true;
+            _ta.ReverseY = value;
             return this;
         }
 
