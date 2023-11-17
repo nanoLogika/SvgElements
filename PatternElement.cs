@@ -16,27 +16,45 @@ namespace SvgElements {
 	/// </summary>
 	public class PatternElement : GroupElementBase {
 
-		public enum PatternUnits {
+		public enum PatternUnitsType {
 			UserSpaceOnUse,
 			ObjectBoundingBox
 		}
 
 
+		/// <summary>
+		/// Get or sets the x-coordinate of left-bottom corner of the patterns's bounding box.
+		/// </summary>
 		public double X { get; set; } = 0;
 
 
+		/// <summary>
+		/// Get or sets the y-coordinate of left-bottom corner of the patterns's bounding box.
+		/// </summary>
 		public double Y { get; set; } = 0;
 
 
-		public string Width { get; set; } = "0";
+		/// <summary>
+		/// Gets or sets the width of the patterns's bounding box.
+		/// </summary>
+		public double Width { get; set; } = 0;
 
 
-		public string Height { get; set; } = "0";
+		/// <summary>
+		/// Gets or sets the width of the patterns's bounding box.
+		/// </summary>
+		public double Height { get; set; } = 0;
 
 
-		public PatternUnits Units { get; set; } = PatternUnits.UserSpaceOnUse;
+		/// <summary>
+		/// Gets or sets the value for the <i>patternUnits</i> attribute.
+		/// </summary>
+		public PatternUnitsType PatternUnits { get; set; } = PatternUnitsType.UserSpaceOnUse;
 
 
+		/// <summary>
+		/// Gets or sets the list of <see cref="XElement"/> objects.
+		/// </summary>
 		public List<XElement> Elements = new List<XElement>();
 
 
@@ -50,12 +68,13 @@ namespace SvgElements {
 				xElement.Add(new XComment(Comment));
 			}
 			AddID(xElement);
-			xElement.Add(new XAttribute("x", X));
-			xElement.Add(new XAttribute("y", Y));
-			xElement.Add(new XAttribute("width", Width));
-			xElement.Add(new XAttribute("height", Height));
+			xElement.Add(new XAttribute("x", Cd(X)));
+			xElement.Add(new XAttribute("y", Cd(Y)));
+			xElement.Add(new XAttribute("width", Cd(Width)));
+			xElement.Add(new XAttribute("height", Cd(Height)));
+			AddStroke(xElement);
 
-			string patternUnits = Units.ToString();
+			string patternUnits = PatternUnits.ToString();
 			patternUnits = patternUnits[0].ToString().ToLower() + patternUnits.Substring(1);
 			xElement.Add(new XAttribute("patternUnits", patternUnits));
 

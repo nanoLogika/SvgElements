@@ -56,9 +56,21 @@ namespace SvgElements {
 
 
         /// <summary>
+        /// Gets or sets the width value for SVG element.
+        /// </summary>
+        public string Width { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets the height value for SVG element.
+        /// </summary>
+        public string Height { get; set; }
+
+
+        /// <summary>
         /// Gets or sets a value for the <i>style</i> attribute.
         /// </summary>
-        public string Style { get; set; } = "width:100%;height:100%;position:fixed;top:0;left:0;bottom:0;right:0;";
+        public string Style { get; set; } = "width:100%;height:100%;position:fixed;";
         
         
         /// <summary>
@@ -85,7 +97,7 @@ namespace SvgElements {
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns>This <see cref="SvgElement"/>.</returns>
-        public SvgElement WithViewbox(double minX, double minY, double width, double height) {
+        public SvgElement WithViewbox(double? minX, double? minY, double? width, double? height) {
             ViewboxMinX = minX;
             ViewboxMinY = minY;
             ViewboxWidth = width;
@@ -99,8 +111,11 @@ namespace SvgElements {
             XNamespace xmlnssvg = Xmlns;
             XElement svg = new XElement(xmlnssvg + "svg");
             AddID(svg);
+            bool withSize = !string.IsNullOrEmpty(Width) && !string.IsNullOrEmpty(Height);
             bool withViewbox = ViewboxMinX != null && ViewboxMinY != null && ViewboxWidth != null && ViewboxHeight != null;
-            AddAttribute(svg, "viewbox", $"{ViewboxMinX} {ViewboxMinY} {ViewboxWidth} {ViewboxHeight}", withViewbox);
+            AddAttribute(svg, "viewbox", $"{ViewboxMinX} {ViewboxMinY} {ViewboxWidth} {ViewboxHeight}", !withSize && withViewbox);
+            AddAttribute(svg, "width", Width, withSize && !withViewbox);
+            AddAttribute(svg, "height", Height, withSize && !withViewbox);
             AddAttribute(svg, "style", Style, !string.IsNullOrEmpty(Style));
             AddAttribute(svg, "version", Version, !string.IsNullOrEmpty(Version));
             AddStroke(svg);
