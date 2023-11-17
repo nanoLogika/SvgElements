@@ -108,19 +108,19 @@ namespace SvgElements {
 
         /// <inheritdoc />
         public override XElement GetXml() {
-			XNamespace xmlnssvg = Xmlns;
-			XElement svg = new XElement(xmlnssvg + "svg");
-			AddID(svg);
+            XNamespace xmlnssvg = Xmlns;
+            XElement svg = new XElement(xmlnssvg + "svg");
+            AddID(svg);
             bool withSize = !string.IsNullOrEmpty(Width) && !string.IsNullOrEmpty(Height);
-			bool withViewbox = ViewboxMinX != null && ViewboxMinY != null && ViewboxWidth != null && ViewboxHeight != null;
-			AddAttribute(svg, "viewbox", $"{ViewboxMinX} {ViewboxMinY} {ViewboxWidth} {ViewboxHeight}", !withSize && withViewbox);
+            bool withViewbox = ViewboxMinX != null && ViewboxMinY != null && ViewboxWidth != null && ViewboxHeight != null;
+            AddAttribute(svg, "viewbox", $"{ViewboxMinX} {ViewboxMinY} {ViewboxWidth} {ViewboxHeight}", !withSize && withViewbox);
             AddAttribute(svg, "width", Width, withSize && !withViewbox);
             AddAttribute(svg, "height", Height, withSize && !withViewbox);
-			AddAttribute(svg, "style", Style, !string.IsNullOrEmpty(Style));
-			AddAttribute(svg, "version", Version, !string.IsNullOrEmpty(Version));
-			AddStroke(svg);
-			AddFill(svg);
-			return svg;
-		}
+            AddAttribute(svg, "style", Style, !string.IsNullOrEmpty(Style));
+            AddAttribute(svg, "version", Version, !string.IsNullOrEmpty(Version));
+            AddStroke(svg);
+            AddFill(svg);
+            return svg;
+        }
     }
 }
