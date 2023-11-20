@@ -5,6 +5,7 @@
 //  See LICENSE file in the project root for full license information.
 #endregion
 
+using System.Text;
 using System.Xml.Linq;
 
 
@@ -106,21 +107,55 @@ namespace SvgElements {
         }
 
 
+        private XElement _styleXElement;
+        private StringBuilder _valueSb = new StringBuilder();
+
+
+        public SvgElement AddCss(string css, bool addCss = true) {
+            if (!addCss || string.IsNullOrEmpty(css)) {
+                return this;
+            }
+            _styleXElement = new XElement("style");
+            _styleXElement.Add(new XAttribute("type", "text/css"));
+            _styleXElement.Value = css;
+            return this;
+        }
+
+
+        public SvgElement AddValue(string value, bool addValue = true) {
+            if (!addValue || string.IsNullOrEmpty(value)) {
+                return this;
+            }
+            _valueSb.AppendLine(value);
+            return this;
+        }
+
+
         /// <inheritdoc />
         public override XElement GetXml() {
-            XNamespace xmlnssvg = Xmlns;
-            XElement svg = new XElement(xmlnssvg + "svg");
-            AddID(svg);
+			XNamespace xmlnssvg = Xmlns;
+			XElement svg = new XElement(xmlnssvg + "svg");
+			AddID(svg);
             bool withSize = !string.IsNullOrEmpty(Width) && !string.IsNullOrEmpty(Height);
-            bool withViewbox = ViewboxMinX != null && ViewboxMinY != null && ViewboxWidth != null && ViewboxHeight != null;
-            AddAttribute(svg, "viewbox", $"{ViewboxMinX} {ViewboxMinY} {ViewboxWidth} {ViewboxHeight}", !withSize && withViewbox);
+			bool withViewbox = ViewboxMinX != null && ViewboxMinY != null && ViewboxWidth != null && ViewboxHeight != null;
+			AddAttribute(svg, "viewbox", $"{ViewboxMinX} {ViewboxMinY} {ViewboxWidth} {ViewboxHeight}", !withSize && withViewbox);
             AddAttribute(svg, "width", Width, withSize && !withViewbox);
             AddAttribute(svg, "height", Height, withSize && !withViewbox);
-            AddAttribute(svg, "style", Style, !string.IsNullOrEmpty(Style));
-            AddAttribute(svg, "version", Version, !string.IsNullOrEmpty(Version));
-            AddStroke(svg);
-            AddFill(svg);
-            return svg;
-        }
+			AddAttribute(svg, "style", Style, !string.IsNullOrEmpty(Style));
+			AddAttribute(svg, "version", Version, !string.IsNullOrEmpty(Version));
+			AddStroke(svg);
+			AddFill(svg);
+
+            StringBuilder sb = new StringBuilder();
+            if (_styleXElement != null) {
+                sb.AppendLine(_styleXElement.ToString());
+            }
+            if (_valueSb.Length > 0) {
+                sb.AppendLine(_valueSb.ToString());
+            }
+            svg.Value = sb.ToString();
+
+			return svg;
+		}
     }
 }
