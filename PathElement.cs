@@ -184,12 +184,56 @@ namespace SvgElements {
 
 
         /// <summary>
+        /// Adds an arc clause without a move or line clause before to the d-Attribute
+        /// of this path element and returns this element.
+        /// </summary>
+        /// <param name="r1"></param>
+        /// <param name="r2"></param>
+        /// <param name="rot"></param>
+        /// <param name="lf"></param>
+        /// <param name="sf"></param>
+        /// <param name="xe"></param>
+        /// <param name="ye"></param>
+        /// <returns>This <see cref="PathElement"/>.</returns>
+        public PathElement AddArc(double r1, double r2, double rot, bool lf, bool sf, double xe, double ye) {
+            _da.AddArc(r1, r2, rot, lf, sf, xe, ye);
+            return this;
+        }
+
+
+        /// <summary>
+        /// Adds a move clause and quadratic spline clause to the d-Attribute
+        /// of this path element and returns this element.
+        /// </summary>
+        /// <param name="doubles"></param>
+        /// <returns>This <see cref="PathElement"/>.</returns>
+        public PathElement AddMoveAndQSpline(double[] doubles) {
+            _da.AddMoveAndQSpline(doubles);
+            return this;
+        }
+
+
+        /// <summary>
+        /// Adds a move clause and quadratic spline clause to the d-Attribute
+        /// of this path element and returns this element.
+        /// </summary>
+        /// <param name="doubles"></param>
+        /// <returns>This <see cref="PathElement"/>.</returns>
+        public PathElement AddMoveAndCSpline(double[] doubles) {
+            _da.AddMoveAndCSpline(doubles);
+            return this;
+        }
+
+
+        /// <summary>
         /// Adds a close clause Z to the d-Attribute
         /// of this path element and returns this element.
         /// </summary>
         /// <returns>This <see cref="PathElement"/>.</returns>
-        public PathElement Close() {
-            _da.Close();
+        public PathElement Close(bool close = true) {
+            if (close) {
+                _da.Close();
+            }
             return this;
         }
 

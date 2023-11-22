@@ -65,7 +65,22 @@ namespace SvgElements.Da {
 		}
 
 
-		public void Close() {
+        internal void AddArc(double r1, double r2, double rot, bool lf, bool sf, double xe, double ye) {
+			_daList.Add(new ArcDaClause(r1, r2, rot, lf, sf, xe, ye));
+        }
+
+
+        internal void AddMoveAndQSpline(double[] doubles) {
+            _daList.Add(new QSplineDaClause(doubles[0], doubles[1], doubles[2], doubles[3], doubles[4], doubles[5]));
+        }
+
+
+        internal void AddMoveAndCSpline(double[] doubles) {
+            _daList.Add(new CSplineDaClause(doubles[0], doubles[1], doubles[2], doubles[3], doubles[4], doubles[5], doubles[6], doubles[7]));
+        }
+
+
+        public void Close() {
 			_isClosed = true;
 		}
 
@@ -85,5 +100,5 @@ namespace SvgElements.Da {
             }
 			return sb.ToString().Trim();
 		}
-	}
+    }
 }
