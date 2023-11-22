@@ -5,7 +5,6 @@
 //  See LICENSE file in the project root for full license information.
 #endregion
 
-using System.Text;
 using System.Xml.Linq;
 
 
@@ -25,6 +24,9 @@ namespace SvgElements {
 			AddID(xElement);
 			AddClass(xElement);
 			AddTransform(xElement);
+			AddStroke(xElement);
+			AddFill(xElement);
+
 			foreach (SvgElementBase child in Children) {
 				if (child == null) {
 					continue;
