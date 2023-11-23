@@ -11,7 +11,7 @@ using System.Xml.Linq;
 namespace SvgElements {
 
 	/// <summary>
-	/// Represent a SVG group element (<i>g</i>) containing other SVG elements.
+	/// Represents a SVG group element (<i>g</i>) containing other SVG elements.
 	/// </summary>
 	public class GroupElement : GroupElementBase {
 

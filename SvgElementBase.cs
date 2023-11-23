@@ -118,14 +118,12 @@ namespace SvgElements {
 
 
         /// <summary>
-        /// Sets the values for the <i>stroke</i> attribute and the <i>stroke-width</i> attribute
+        /// Sets the values for the <i>stroke-width</i> attribute
         /// and returns this element.
         /// </summary>
-        /// <param name="stroke"></param>
         /// <param name="strokeWidth"></param>
         /// <returns>This <see cref="SvgElementBase"/>.</returns>
-        public SvgElementBase WithStroke(string stroke, double strokeWidth) {
-            Stroke = stroke;
+        public SvgElementBase WithStrokeWidth(double? strokeWidth) {
             StrokeWidth = strokeWidth;
             return this;
         }
@@ -328,7 +326,7 @@ namespace SvgElements {
             if (!string.IsNullOrEmpty(Stroke)) {
                 xElement.Add(new XAttribute("stroke", Stroke));
             }
-            if (StrokeWidth > 0) {
+            if (StrokeWidth != null && StrokeWidth > 0) {
                 xElement.Add(new XAttribute("stroke-width", StrokeWidth));
             }
         }
