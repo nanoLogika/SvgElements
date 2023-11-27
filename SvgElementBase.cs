@@ -327,7 +327,7 @@ namespace SvgElements {
                 xElement.Add(new XAttribute("stroke", Stroke));
             }
             if (StrokeWidth != null && StrokeWidth > 0) {
-                xElement.Add(new XAttribute("stroke-width", StrokeWidth));
+                xElement.Add(new XAttribute("stroke-width", Math.Round(StrokeWidth.GetValueOrDefault(), 4)));
             }
         }
 
