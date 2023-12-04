@@ -75,7 +75,7 @@ namespace SvgElements.Da {
 
 
 		public override string ToString() {
-			return $"{base.ToString()} {Cd(Mx)} {Cd(My)} A {Cd(Rx)} {Cd(Rx)} {Cd(Rot)} {Lf} {Sf} {Cd(Ex)} {Cd(Ey)}";
+			return $"{base.ToString()} {Cd(Mx)} {Cd(My)} A {Cd(Rx)} {Cd(Ry)} {Cd(Rot)} {Lf} {Sf} {Cd(Ex)} {Cd(Ey)}";
 		}
 	}
 }
