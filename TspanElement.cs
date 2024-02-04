@@ -85,7 +85,7 @@ namespace SvgElements {
         /// A <see cref="TspanElement"/> or null when the element was not created as
         /// a child of another element.
         /// </value>
-        public TspanElement? ParentElement { get; private set; }
+        public TspanElement? ParentElement { get; set; }
 
 
         /// <summary>
@@ -94,14 +94,14 @@ namespace SvgElements {
         /// value is set null.
         /// </summary>
         /// <param name="tspan"></param>
-        public TspanElement AddChild(TspanElement tspan) {
-            if (!string.IsNullOrEmpty(Value)) {
-                Value = null;
-            }
-            tspan.ParentElement = this;
-            Tspans.Add(tspan);
-            return this;
-        }
+        //public TspanElement AddChild(TspanElement tspan) {
+        //    if (!string.IsNullOrEmpty(Value)) {
+        //        Value = null;
+        //    }
+        //    tspan.ParentElement = this;
+        //    Tspans.Add(tspan);
+        //    return this;
+        //}
 
 
         /// <inhertdoc />
