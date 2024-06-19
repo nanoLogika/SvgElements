@@ -13,7 +13,7 @@ namespace SvgElements {
 	/// <summary>
 	/// Represents a SVG <i>defs</i> element.
 	/// </summary>
-	public class DefsElement : GroupElementBase {
+	public class DefsElement : GroupElementBase<DefsElement> {
 
 		/// <summary>
 		/// Gets a value indicating whether a group element with the
@@ -25,7 +25,7 @@ namespace SvgElements {
 		/// <paramref name="id"/> exists; otherwise,<b>false</b>.
 		/// </returns>
 		public bool Contains(string id) {
-			foreach (GroupElement groupElement in Children) {
+			foreach (SvgElementBase groupElement in Children) {
 				if (groupElement.ID == id) {
 					return true;
 				}

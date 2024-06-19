@@ -14,7 +14,7 @@ namespace SvgElements {
     /// <summary>
     /// Represents a SVG <i>path</i> element. 
     /// </summary>
-	public class PathElement : SvgElementBase {
+	public class PathElement : SvgElementBase<PathElement> {
 
         private DAttribute _da = new DAttribute();
 

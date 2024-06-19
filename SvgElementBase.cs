@@ -5,10 +5,11 @@
 //  See LICENSE file in the project root for full license information.
 #endregion
 
-using SvgElements.Transform;
 using System.Globalization;
 using System.Text;
 using System.Xml.Linq;
+
+using SvgElements.Transform;
 
 
 namespace SvgElements {
@@ -18,7 +19,29 @@ namespace SvgElements {
     /// </summary>
 	public abstract class SvgElementBase {
 
-        private TransformAttribute _ta = new TransformAttribute();
+        internal TransformAttribute _ta = new TransformAttribute();
+
+        /// <summary>
+        /// Returns an XML-element built from the properties of this SVG-element
+        /// object.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="XElement"/> built from the properties of this
+        /// SVG-element.
+        /// </returns>
+        public abstract XElement GetXml();
+
+
+        /// <summary>
+        /// Formats a double value with a decimal dot as needed in numerical attribute
+        /// of a SVG element.
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="places"></param>
+        /// <returns>A string containing the formatted double value.</returns>
+        public static string Cd(double val, int places = 6) {
+            return Math.Round(val, places).ToString(CultureInfo.InvariantCulture);
+        }
 
 
         /// <summary>
@@ -30,7 +53,7 @@ namespace SvgElements {
         /// <summary>
         /// Gets or sets an optional value for the <i>class</i> attribute.
         /// </summary>
-        public string Class {  get; set; }
+        public string Class { get; set; }
 
 
         /// <summary>
@@ -38,7 +61,7 @@ namespace SvgElements {
         /// <see cref="SvgElementBase"/> is to be displayed.
         /// </summary>
         /// <value><b>true</b>, when the comment is to be displayed; otherwise, <b>false</b>.</value>
-		public static bool CommentsEnabled { get; set; } = false;
+        public static bool CommentsEnabled { get; set; } = false;
 
 
         /// <summary>
@@ -76,19 +99,24 @@ namespace SvgElements {
         /// Gets the value of the <i>transform</i> attribute, built from the specified clauses.
         /// </summary>
         public string Transform {
-            get { return _ta.ToString(); } 
+            get { return _ta.ToString(); }
         }
+    }
 
+    /// <summary>
+    /// Base class for all classes that represent SVG elements.
+    /// </summary>
+    public abstract class SvgElementBase<T> : SvgElementBase {
 
         /// <summary>
         /// Sets the value for the <i>id</i> attribute
         /// and returns this element.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>This <see cref="SvgElementBase"/>.</returns>
-        public SvgElementBase WithID(string id) {
+        /// <returns>This <see cref="T"/>.</returns>
+        public T WithID(string id) {
             ID = id;
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -97,10 +125,10 @@ namespace SvgElements {
         /// and returns this element.
         /// </summary>
         /// <param name="className"></param>
-        /// <returns>This <see cref="SvgElementBase"/>.</returns>
-        public SvgElementBase WithClass(string className) {
+        /// <returns>This <see cref="T"/>.</returns>
+        public T WithClass(string className) {
             Class = className;
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -109,11 +137,11 @@ namespace SvgElements {
         /// and returns this element.
         /// </summary>
         /// <param name="stroke"></param>
-        /// <returns>This <see cref="SvgElementBase"/>.</returns>
+        /// <returns>This <see cref="T"/>.</returns>
 
-        public SvgElementBase WithStroke(string stroke) {
+        public T WithStroke(string stroke) {
             Stroke = stroke;
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -122,10 +150,10 @@ namespace SvgElements {
         /// and returns this element.
         /// </summary>
         /// <param name="strokeWidth"></param>
-        /// <returns>This <see cref="SvgElementBase"/>.</returns>
-        public SvgElementBase WithStrokeWidth(double? strokeWidth) {
+        /// <returns>This <see cref="T"/>.</returns>
+        public T WithStrokeWidth(double? strokeWidth) {
             StrokeWidth = strokeWidth;
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -134,10 +162,10 @@ namespace SvgElements {
         /// and returns this element.
         /// </summary>
         /// <param name="strokeDashArray"></param>
-        /// <returns>This <see cref="SvgElementBase"/>.</returns>
-        public SvgElementBase WithStrokeDashArray(string strokeDashArray) {
+        /// <returns>This <see cref="T"/>.</returns>
+        public T WithStrokeDashArray(string strokeDashArray) {
             StrokeDashArray = strokeDashArray;
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -146,22 +174,22 @@ namespace SvgElements {
         /// color name or Hex RGB-value and returns this element.
         /// </summary>
         /// <param name="fill"></param>
-        /// <returns>This <see cref="SvgElementBase"/>.</returns>
-        public SvgElementBase WithFill(string fill) {
+        /// <returns>This <see cref="T"/>.</returns>
+        public T WithFill(string fill) {
             Fill = fill;
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
         /// <summary>
-        /// Sets the fill property with an fill attribute value containg a URL
+        /// Sets the fill property with a fill attribute value containg a URL
         /// expression with the passed fill URL and returns this element.
         /// </summary>
-        /// <param name="fill"></param>
-        /// <returns>This <see cref="SvgElementBase"/>.</returns>
-        public SvgElementBase WithFillURL(string fillUrl) {
+        /// <param name="fillUrl"></param>
+        /// <returns>This <see cref="T"/>.</returns>
+        public T WithFillURL(string fillUrl) {
             Fill = $"url({fillUrl})";
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -172,9 +200,9 @@ namespace SvgElements {
         /// <param name="x">Scale factor for x.</param>
         /// <param name="y">Scale factor for y.</param>
         /// <returns></returns>
-        public SvgElementBase AddScale(double x, double y) {
+        public T AddScale(double x, double y) {
             _ta.AddScale(x, y);
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -184,10 +212,10 @@ namespace SvgElements {
         /// </summary>
         /// <param name="xy">Scale factor for x and y.</param>
         /// <returns></returns>
-        public SvgElementBase AddScale(double xy) {
+        public T AddScale(double xy) {
             _ta.AddScale(xy);
-            return this;
-		}
+            return (T)Convert.ChangeType(this, typeof(T));
+        }
 
 
         /// <summary>
@@ -196,9 +224,9 @@ namespace SvgElements {
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public SvgElementBase AddRotate(double a) {
+        public T AddRotate(double a) {
             _ta.AddRotate(a);
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -210,9 +238,9 @@ namespace SvgElements {
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public SvgElementBase AddRotate(double a, double x, double y) {
+        public T AddRotate(double a, double x, double y) {
             _ta.AddRotate(a, x, y);
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -223,10 +251,10 @@ namespace SvgElements {
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public SvgElementBase AddTranslate(double x, double y) {
+        public T AddTranslate(double x, double y) {
             _ta.AddTranslate(x, y);
-            return this;
-		}
+            return (T)Convert.ChangeType(this, typeof(T));
+        }
 
 
         /// <summary>
@@ -234,9 +262,9 @@ namespace SvgElements {
         /// the y-coordinate.
         /// </summary>
         /// <returns></returns>
-        public SvgElementBase ReverseY(bool value = true) {
+        public T ReverseY(bool value = true) {
             _ta.ReverseY = value;
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
 
 
@@ -245,22 +273,11 @@ namespace SvgElements {
         /// and return this element.
         /// </summary>
         /// <param name="comment"></param>
-        /// <returns>This <see cref="SvgElementBase"/>.</returns>
-        public SvgElementBase WithComment(string comment) {
+        /// <returns>This <see cref="T"/>.</returns>
+        public T WithComment(string comment) {
             Comment = comment;
-            return this;
+            return (T)Convert.ChangeType(this, typeof(T));
         }
-
-
-        /// <summary>
-        /// Returns an XML-element built from the properties of this SVG-element
-        /// object.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="XElement"/> built from the properties of this
-        /// SVG-element.
-        /// </returns>
-        public abstract XElement GetXml();
 
 
         /// <summary>
@@ -285,18 +302,6 @@ namespace SvgElements {
 		private string replaceSpecialCharacters(string value) {
 			return value.Replace("&gt;", ">").Replace("&lt;", "<");
 		}
-
-
-        /// <summary>
-        /// Formats a double value with a decimal dot as needed in numerical attribute
-        /// of a SVG element.
-        /// </summary>
-        /// <param name="val"></param>
-        /// <param name="places"></param>
-        /// <returns>A string containing the formatted double value.</returns>
-        public static string Cd(double val, int places = 6) {
-            return Math.Round(val, places).ToString(CultureInfo.InvariantCulture);
-        }
 
 
         #region Internal methods to add optional attributes

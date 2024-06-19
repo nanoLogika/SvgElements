@@ -13,7 +13,7 @@ namespace SvgElements {
     /// <summary>
     /// Represents SVG <i>circle</i> element.
     /// </summary>
-	public class CircleElement : SvgElementBase {
+	public class CircleElement : SvgElementBase<CircleElement> {
 
         /// <summary>
         /// Gets or sets the x-coordinate of the circle center.
