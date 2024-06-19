@@ -13,7 +13,7 @@ namespace SvgElements {
     /// <summary>
     /// Base class for the classes that represent SVG text and tspan elements.
     /// </summary>
-    public abstract class TextElementBase : SvgElementBase {
+    public abstract class TextElementBase<T> : SvgElementBase<T> {
 
         private string _value;
 

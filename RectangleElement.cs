@@ -13,7 +13,7 @@ namespace SvgElements {
     /// <summary>
     /// Represents a SVG <i>rect</i> element. 
     /// </summary>
-    public class RectangleElement : SvgElementBase {
+    public class RectangleElement : SvgElementBase<RectangleElement> {
 
         /// <summary>
         /// Gets or sets the x-coordinate of one of the corners

@@ -13,7 +13,7 @@ namespace SvgElements {
     /// <summary>
     /// Represents a SVG <i>tspan</i> element.
     /// </summary>
-    public class TspanElement : TextElementBase {
+    public class TspanElement : TextElementBase<TspanElement> {
 
         /// <summary>
         /// Initializes a new instance of a <see cref="TspanElement"/>

@@ -13,7 +13,7 @@ namespace SvgElements {
 	/// <summary>
 	/// Represents a SVG group element (<i>g</i>) containing other SVG elements.
 	/// </summary>
-	public class GroupElement : GroupElementBase {
+	public class GroupElement : GroupElementBase<GroupElement> {
 
 		/// <inheritdoc />
 		public override XElement GetXml() {

@@ -14,7 +14,7 @@ namespace SvgElements {
 	/// <summary>
 	/// Represents 
 	/// </summary>
-	public class PatternElement : GroupElementBase {
+	public class PatternElement : GroupElementBase<PatternElement> {
 
 		public enum PatternUnitsType {
 			UserSpaceOnUse,

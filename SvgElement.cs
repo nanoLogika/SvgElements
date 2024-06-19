@@ -14,7 +14,7 @@ namespace SvgElements {
     /// <summary>
     /// Represents the <i>svg</i> Element.
     /// </summary>
-    public class SvgElement : SvgElementBase {
+    public class SvgElement : SvgElementBase<SvgElement> {
 
         /// <summary>
         /// Gets or sets the min-x value for the <i>viewbox</i> attribute.

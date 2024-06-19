@@ -13,7 +13,7 @@ namespace SvgElements {
 	/// <summary>
 	/// Represents a SVG <i>text</i> element. 
 	/// </summary>
-	public class TextElement : TextElementBase {
+	public class TextElement : TextElementBase<TextElement> {
 
 		private string _requestedAlignmentBaseline = string.Empty;
 

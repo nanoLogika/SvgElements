@@ -13,7 +13,7 @@ namespace SvgElements {
     /// <summary>
     /// Represents SVG <i>ellipse</i> element.
     /// </summary>
-	public class EllipseElement : SvgElementBase {
+	public class EllipseElement : SvgElementBase<EllipseElement> {
 
 		/// <summary>
 		/// Gets or sets the x-coordinate of the ellipse center.

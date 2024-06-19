@@ -12,7 +12,7 @@ namespace SvgElements {
 	/// Base class for objects representing a group-like SVG element such
 	/// as <i>g</i>, <i>pattern</i>, <i>defs</i>.
 	/// </summary>
-	public abstract class GroupElementBase : SvgElementBase {
+	public abstract class GroupElementBase<T> : SvgElementBase<T> {
 
 		/// <summary>
 		/// Get the list of child SVG elements of this group element

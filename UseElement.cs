@@ -13,7 +13,7 @@ namespace SvgElements {
 	/// <summary>
 	/// Represents SVG <i>use</i> element.
 	/// </summary>
-	public class UseElement : SvgElementBase {
+	public class UseElement : SvgElementBase<UseElement> {
 
 		private string _groupId;
 
