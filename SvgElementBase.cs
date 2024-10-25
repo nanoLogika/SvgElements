@@ -21,6 +21,10 @@ namespace SvgElements {
 
         internal TransformAttribute _ta = new TransformAttribute();
 
+        // TODO: Parser for reading transform from string value
+        private string _transform;
+
+
         /// <summary>
         /// Returns an XML-element built from the properties of this SVG-element
         /// object.
@@ -99,7 +103,20 @@ namespace SvgElements {
         /// Gets the value of the <i>transform</i> attribute, built from the specified clauses.
         /// </summary>
         public string Transform {
-            get { return _ta.ToString(); }
+            get {
+                if (!string.IsNullOrEmpty(_transform))
+                {
+					return _transform;
+				}
+                else
+                {
+					return _ta.ToString();
+                }
+            }
+            set {
+                _transform = value;
+                _ta.Clear();
+            }
         }
     }
 

@@ -61,6 +61,12 @@ namespace SvgElements.Transform {
 		}
 
 
+		public void Clear()
+		{
+			_transformList.Clear();
+		}
+
+
 		public override string ToString() {
 			StringBuilder sb = new StringBuilder();
 			foreach (TransformClauseBase transformClause in _transformList) {
