@@ -50,32 +50,37 @@ namespace SvgElements.Da {
 		}
 
 
-		public void AddMoveAndArc(double cx, double cy, double sa, double ea, double r, bool counterClockWise = true) {
-			_daList.Add(new MoveAbsArcDaClause(cx, cy, sa, ea, r, counterClockWise));
+		public void AddMoveAndArc(double startX, double startY, double endX, double endY, double r, bool largeArc, bool sweep) {
+			_daList.Add(new MoveAbsArcDaClause(startX, startY, endX, endY, r, largeArc, sweep));
 		}
 
 
-		public void AddMoveAndArc(double cx, double cy, double sa, double ea, double rx, double ry, double rot, bool counterClockWise = true) {
-			_daList.Add(new MoveAbsArcDaClause(cx, cy, sa, ea, rx, ry, rot, counterClockWise));
+		public void AddMoveAndArc(double startX, double startY, double endX, double endY, double rx, double ry, double rot, bool largeArc, bool sweep) {
+			_daList.Add(new MoveAbsArcDaClause(startX, startY, endX, endY, rx, ry, rot, largeArc, sweep));
 		}
 
 
-		public void AddLineAndArc(double cx, double cy, double sa, double ea, double r, bool counterClockWise = true) {
-			_daList.Add(new LineAbsArcDaClause(cx, cy, sa, ea, r, counterClockWise));
+		public void AddLineAndArc(double startX, double startY, double endX, double endY, double r, bool largeArc, bool sweep) {
+			_daList.Add(new LineAbsArcDaClause(startX, startY, endX, endY, r, largeArc, sweep));
 		}
 
 
-        internal void AddArc(double r1, double r2, double rot, bool lf, bool sf, double xe, double ye) {
-			_daList.Add(new ArcDaClause(r1, r2, rot, lf, sf, xe, ye));
+        public void AddLineAndArc(double startX, double startY, double endX, double endY, double rx, double ry, double rot, bool largeArc, bool sweep) {
+            _daList.Add(new LineAbsArcDaClause(startX, startY, endX, endY, rx, ry, rot, largeArc, sweep));
         }
 
 
-        internal void AddMoveAndQSpline(double[] doubles) {
+        public void AddArc(double r1, double r2, double rot, bool largeArc, bool sweep, double xe, double ye) {
+			_daList.Add(new ArcDaClause(r1, r2, rot, largeArc, sweep, xe, ye));
+        }
+
+
+        public void AddMoveAndQSpline(double[] doubles) {
             _daList.Add(new QSplineDaClause(doubles[0], doubles[1], doubles[2], doubles[3], doubles[4], doubles[5]));
         }
 
 
-        internal void AddMoveAndCSpline(double[] doubles) {
+        public void AddMoveAndCSpline(double[] doubles) {
             _daList.Add(new CSplineDaClause(doubles[0], doubles[1], doubles[2], doubles[3], doubles[4], doubles[5], doubles[6], doubles[7]));
         }
 
