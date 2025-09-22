@@ -80,7 +80,7 @@ namespace SvgElements.Da {
         }
 
 
-        internal void AddMoveAndCSpline(double[] doubles) {
+        public void AddMoveAndCSpline(double[] doubles) {
             _daList.Add(new CSplineDaClause(doubles[0], doubles[1], doubles[2], doubles[3], doubles[4], doubles[5], doubles[6], doubles[7]));
         }
 
