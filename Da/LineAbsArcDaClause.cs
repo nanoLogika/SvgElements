@@ -7,48 +7,15 @@
 
 namespace SvgElements.Da {
 
-	internal class LineAbsArcDaClause : DaClauseBase {
+	internal class LineAbsArcDaClause : DaAbsArcClauseBase {
 
-		public double Mx { get; }
-
-
-		public double My { get; }
-
-
-		public double R { get; }
-
-
-		public double Lf { get; }
-
-
-		public double Sf { get; }
-
-
-		public double Ex { get; }
-
-
-		public double Ey { get; }
-
-
-		public LineAbsArcDaClause(double cx, double cy, double sa, double ea, double r, bool counterClockWise = true) : base("L") {
-			var f = counterClockWise ? 1 : -1;
-			Sf = counterClockWise ? 1 : 0;
-			Mx = cx + r * Math.Cos(sa);
-			My = cy + r * f * Math.Sin(sa);
-			Ex = cx + r * Math.Cos(ea);
-			Ey = cy + r * f * Math.Sin(ea);
-
-			R = r;
-
-			Lf = counterClockWise && (ea - sa) < Math.PI ||
-				!counterClockWise && (ea - sa) < Math.PI
-				?
-				0 : 1;
+		public LineAbsArcDaClause(double startX, double startY, double endX, double endY, double r, bool largeArc, bool sweep)
+            : base(startX, startY, endX, endY, r, largeArc, sweep, "L") {
 		}
 
 
-		public override string ToString() {
-			return $"{base.ToString()} {Cd(Mx)} {Cd(My)} A {Cd(R)} {Cd(R)} 0 {Lf} {Sf} {Cd(Ex)} {Cd(Ey)}";
-		}
+        public LineAbsArcDaClause(double startX, double startY, double endX, double endY, double rx, double ry, double rot, bool largeArc, bool sweep)
+            : base(startX, startY, endX, endY, rx, ry, rot, largeArc, sweep, "L") {
+        }
 	}
 }
