@@ -131,54 +131,77 @@ namespace SvgElements {
 
 
         /// <summary>
-        /// Adds a move clause and an circular arc clause to the d-Attribute
+        /// Adds move clause to the start point and an circular arc clause to the d-Attribute
         /// of this path element and returns this element.
         /// </summary>
-        /// <param name="cx"></param> 
-        /// <param name="cy"></param>
-        /// <param name="sa"></param>
-        /// <param name="ea"></param>
-        /// <param name="r"></param>
-        /// <param name="counterClockWise"></param>
+        /// <param name="startX">X of the start point of the arc.</param>
+        /// <param name="startY">Y of the start point of the arc.</param>
+        /// <param name="endX">X of the end point of the arc.</param>
+        /// <param name="endY">Y of the end point of the arc.</param>
+        /// <param name="r">The arc radius.</param>
+        /// <param name="largeArc">Indicates if <c>true</c> that the large-arc flag ist set to 1; otherwise, 0.</param>
+        /// <param name="sweep">Intcates if <c>true</c> that the sweep flag is set to 1; otherwise, 0.</param>
         /// <returns>This <see cref="PathElement"/>.</returns>
-        public PathElement AddMoveAndArc(double cx, double cy, double sa, double ea, double r, bool counterClockWise = true) {
-            _da.AddMoveAndArc(cx, cy, sa, ea, r, counterClockWise);
+        public PathElement AddMoveAndArc(double startX, double startY, double endX, double endY, double r, bool largeArc, bool sweep) {
+            _da.AddMoveAndArc(startX, startY, endX, endY, r, largeArc, sweep);
             return this;
         }
 
 
         /// <summary>
-        /// Adds a move clause and an elliptic arc clause to the d-Attribute
+        /// Adds a move clause to the start point and an elliptic arc clause to the d-Attribute
         /// of this path element and returns this element.
         /// </summary>
-        /// <param name="cx"></param>
-        /// <param name="cy"></param>
-        /// <param name="sa"></param>
-        /// <param name="ea"></param>
-        /// <param name="rx"></param>
-        /// <param name="ry"></param>
-        /// <param name="rot"></param>
-        /// <param name="counterClockWise"></param>
+        /// <param name="startX">X of the start point of the arc.</param>
+        /// <param name="startY">Y of the start point of the arc.</param>
+        /// <param name="endX">X of the end point of the arc.</param>
+        /// <param name="endY">Y of the end point of the arc.</param>
+        /// <param name="rx">The length of the major axis of the ellipse.</param>
+        /// <param name="ry">The length of the minor axis of the ellipse.</param>
+        /// <param name="rot">The rotation of the major axis in degrees.</param>
+        /// <param name="largeArc">Indicates if <c>true</c> that the large-arc flag ist set to 1; otherwise, 0.</param>
+        /// <param name="sweep">Intcates if <c>true</c> that the sweep flag is set to 1; otherwise, 0.</param>
         /// <returns>This <see cref="PathElement"/>.</returns>
-        public PathElement AddMoveAndArc(double cx, double cy, double sa, double ea, double rx, double ry, double rot, bool counterClockWise = true) {
-            _da.AddMoveAndArc(cx, cy, sa, ea, rx, ry, rot, counterClockWise);
+        public PathElement AddMoveAndArc(double startX, double startY, double endX, double endY, double rx, double ry, double rot, bool largeArc, bool sweep) {
+            _da.AddMoveAndArc(startX, startY, endX, endY, rx, ry, rot, largeArc, sweep);
             return this;
         }
 
 
         /// <summary>
-        /// Adds a line clause and an arc clause to the d-Attribute
+        /// Adds a line clause to the start point and an arc clause to the d-Attribute
         /// of this path element and returns this element.
         /// </summary>
-        /// <param name="cx"></param> 
-        /// <param name="cy"></param>
-        /// <param name="sa"></param>
-        /// <param name="ea"></param>
-        /// <param name="r"></param>
-        /// <param name="counterClockWise"></param>
+        /// <param name="startX">X of the start point of the arc.</param>
+        /// <param name="startY">Y of the start point of the arc.</param>
+        /// <param name="endX">X of the end point of the arc.</param>
+        /// <param name="endY">Y of the end point of the arc.</param>
+        /// <param name="r">The arc radius.</param>
+        /// <param name="largeArc">Indicates if <c>true</c> that the large-arc flag ist set to 1; otherwise, 0.</param>
+        /// <param name="sweep">Intcates if <c>true</c> that the sweep flag is set to 1; otherwise, 0.</param>
         /// <returns>This <see cref="PathElement"/>.</returns>
-        public PathElement AddLineAndArc(double cx, double cy, double sa, double ea, double r, bool counterClockWise = true) {
-            _da.AddLineAndArc(cx, cy, sa, ea, r, counterClockWise);
+        public PathElement AddLineAndArc(double startX, double startY, double endX, double endY, double r, bool largeArc, bool sweep) {
+            _da.AddLineAndArc(startX, startY, endX, endY, r, largeArc, sweep);
+            return this;
+        }
+
+
+        /// <summary>
+        /// Adds a line clause to the start point and an elliptic arc clause to the d-Attribute
+        /// of this path element and returns this element.
+        /// </summary>
+        /// <param name="startX">X of the start point of the arc.</param>
+        /// <param name="startY">Y of the start point of the arc.</param>
+        /// <param name="endX">X of the end point of the arc.</param>
+        /// <param name="endY">Y of the end point of the arc.</param>
+        /// <param name="rx">The length of the major axis of the ellipse.</param>
+        /// <param name="ry">The length of the minor axis of the ellipse.</param>
+        /// <param name="rot">The rotation of the major axis in degrees.</param>
+        /// <param name="largeArc">Indicates if <c>true</c> that the large-arc flag ist set to 1; otherwise, 0.</param>
+        /// <param name="sweep">Intcates if <c>true</c> that the sweep flag is set to 1; otherwise, 0.</param>
+        /// <returns>This <see cref="PathElement"/>.</returns>
+        public PathElement AddLineAndArc(double startX, double startY, double endX, double endY, double rx, double ry, double rot, bool largeArc, bool sweep) {
+            _da.AddLineAndArc(startX, startY, endX, endY, rx, ry, rot, largeArc, sweep);
             return this;
         }
 
